@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  frontend:
+    build: ./app
+    volumes:
+      - ./app/src:/code/src
+      - ./app/public:/code/public
+      - ./app/package.json:/code/package.json
+    ports:
+      - 3000:3000
+  
