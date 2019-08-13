@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Box, Text } from 'grommet'
+import React from 'react'
+import { Box } from 'grommet'
+import TodoItem from './TodoItem';
 
 
 const TodoList = (props) => (
@@ -8,12 +9,10 @@ const TodoList = (props) => (
       border={{ size: 'xsmall', color: 'brand' }}
       round='xsmall'
       width='large'
-      gap='small'
+      pad = 'small'
       direction='column'>
       {props.todos.map((todo, index) => (
-        <Box as='li' direction='row' pad='small' gap='small'>
-          <Text>{todo.text}</Text>
-        </Box>
+        <TodoItem todo={todo} key={index} checkTodo={props.checkTodo} />
       ))}
     </Box>
   </Box>
