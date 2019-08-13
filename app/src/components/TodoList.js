@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 
 
 const TodoList = (props) => (
-  <Box fill align='center' justify='center' pad='medium'>
+  <Box align='center' pad='medium'>
     <Box as='ul'
       border={{ size: 'xsmall', color: 'brand' }}
       round='xsmall'
