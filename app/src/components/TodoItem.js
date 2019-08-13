@@ -11,7 +11,7 @@ const TodoItem = (props) => (
       <Text size='xsmall'>{moment(props.todo.date).format('YYYY. MMMM DD, h:mm')}</Text>
     </Box>}
     onChange={event => {
-      props.checkTodo(props.todo.index);
+      props.checkTodo(props.index);
     }}
   />
 )

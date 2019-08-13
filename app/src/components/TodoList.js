@@ -4,15 +4,16 @@ import TodoItem from './TodoItem';
 
 
 const TodoList = (props) => (
-  <Box fill align='center' justify='center'>
+  <Box fill align='center' justify='center' pad='medium'>
     <Box as='ul'
       border={{ size: 'xsmall', color: 'brand' }}
       round='xsmall'
       width='large'
       pad = 'small'
-      direction='column'>
+      direction='column'
+      overflow='auto'>
       {props.todos.map((todo, index) => (
-        <TodoItem todo={todo} key={index} checkTodo={props.checkTodo} />
+        <TodoItem todo={todo} index={index} key={index} checkTodo={props.checkTodo} />
       ))}
     </Box>
   </Box>
