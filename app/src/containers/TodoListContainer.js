@@ -8,7 +8,7 @@ import TodoList from '../components/TodoList';
 class TodoListContainer extends Component {
   render() {
     return (
-      <TodoList />
+      <TodoList todos={this.props.todos} />
     )
   }
 }

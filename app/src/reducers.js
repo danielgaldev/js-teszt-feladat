@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux'
 import { ADD_TODO, CHECK_TODO } from './actions'
 
-const INITIAL_TODOS = [];
+const INITIAL_TODOS = [
+  {text: 'Finish this app', completed: false},
+  {text: 'Eat dinner', completed: false},
+  {text: 'Work out', completed: true},
+  {text: 'Sleep', completed: false},
+  {text: 'Relax', completed: true}
+];
 
 function todos(state = INITIAL_TODOS, action) {
   switch (action.type) {
