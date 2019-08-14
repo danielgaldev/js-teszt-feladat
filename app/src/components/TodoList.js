@@ -17,8 +17,14 @@ const TodoList = (props) => (
           todo={todo}
           index={index}
           key={index}
+          position={
+            index === 0 ? 'first' :
+            index === props.todos.length - 1 ? 'last' :
+            'middle'
+          }
           checkTodo={props.checkTodo}
-          deleteTodo={props.deleteTodo} />
+          deleteTodo={props.deleteTodo}
+          moveTodo={props.moveTodo} />
       ))}
     </Box>
   </Box>
