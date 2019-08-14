@@ -1,19 +1,27 @@
 import React from 'react'
-import { Form, FormField, Button, Box, Grid, TextInput } from 'grommet'
+import { Form, FormField, Button, Box, TextInput } from 'grommet'
 import { Add } from 'grommet-icons'
 import moment from 'moment'
 
 const AddTodoForm = (props) => (
-  <Box align='center' pad='medium'>
-    <Form onSubmit={({ value }) => props.addTodo(value)}>
-      <Box round='xsmall' width='large' pad='xsmall' border={{ size: 'xsmall', color: 'brand' }}>
-        <Grid gap='xsmall' columns={['flex', 'auto', 'auto']}>
+  <Box align='center' width='large'>
+    <Form style={{ width: '100%' }}
+      onSubmit={({ value }) => props.addTodo(value)}>
+      <Box
+        direction='row-responsive'
+        round='xsmall'
+        fill='horizontal'
+        pad='xsmall' gap='xsmall'
+        border={{ size: 'xsmall', color: 'brand' }}>
+        <Box fill='horizontal'>
           <FormField
             name='text'
             required
             component={TextInput}
             placeholder='Add task'
             plain />
+        </Box>
+        <Box direction='row' justify='between' gap='small'>
           <FormField
             name='date'
             required
@@ -26,7 +34,7 @@ const AddTodoForm = (props) => (
             value={moment().format('YYYY/MM/DD')}
             plain />
           <Button type='submit' primary icon={<Add />} />
-        </Grid>
+        </Box>
       </Box>
     </Form>
   </Box>

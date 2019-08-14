@@ -8,7 +8,10 @@ import AddTodoContainer from './containers/AddTodoContainer';
 class App extends Component {
   render() {
     return (
-      <Box direction='column' fill align='center'>
+      <Box direction='column'
+        align='center'
+        pad='medium'
+        gap='medium'>
         <Heading>TodoApp</Heading>
         <AddTodoContainer />
         <TodoListContainer />
