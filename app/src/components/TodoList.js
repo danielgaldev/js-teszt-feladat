@@ -2,6 +2,14 @@ import React from 'react'
 import { Box } from 'grommet'
 import TodoItem from './TodoItem';
 
+const getPosition = (index, length) => {
+  return (
+    index === 0 ? 'first' :
+      index === length - 1 ? 'last' :
+        length === 1 ? 'only' :
+          'middle'
+  )
+}
 
 const TodoList = (props) => (
   <Box align='center'>
@@ -17,11 +25,7 @@ const TodoList = (props) => (
           todo={todo}
           index={index}
           key={index}
-          position={
-            index === 0 ? 'first' :
-            index === props.todos.length - 1 ? 'last' :
-            'middle'
-          }
+          position={getPosition(index, props.todos.length)}
           checkTodo={props.checkTodo}
           deleteTodo={props.deleteTodo}
           moveTodo={props.moveTodo} />

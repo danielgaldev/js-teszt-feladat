@@ -3,14 +3,8 @@ import moment from 'moment'
 
 import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO } from './actions'
 
-
-const INITIAL_TODOS = [
-  { text: 'Finish this app', completed: false, date: moment('2019-10-08', 'YYYY-MM-DD') },
-  { text: 'Eat dinner', completed: false, date: moment('2019-10-15', 'YYYY-MM-DD') },
-  { text: 'Work out', completed: true, date: moment('2019-11-15', 'YYYY-MM-DD') },
-  { text: 'Sleep', completed: false, date: moment('2019-11-22', 'YYYY-MM-DD') },
-  { text: 'Relax', completed: true, date: moment('2019-11-25', 'YYYY-MM-DD') }
-];
+const storage = localStorage.getItem('todoArray')
+const INITIAL_TODOS = storage ? JSON.parse(storage) : []
 
 function todos(state = INITIAL_TODOS, action) {
   const i = action.index;
