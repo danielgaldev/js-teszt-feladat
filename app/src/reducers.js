@@ -1,21 +1,26 @@
 import { combineReducers } from 'redux'
+import moment from 'moment'
+
 import { ADD_TODO, CHECK_TODO } from './actions'
 
+
 const INITIAL_TODOS = [
-  { text: 'Finish this app', completed: false, date: new Date('2019-10-08T03:14:48') },
-  { text: 'Eat dinner', completed: false, date: new Date('2019-10-15T03:15:01') },
-  { text: 'Work out', completed: true, date: new Date('2019-11-15T03:16:10') },
-  { text: 'Sleep', completed: false, date: new Date('2019-11-22T03:14:53') },
-  { text: 'Relax', completed: true, date: new Date('2019-11-25T03:16:36') }
+  { text: 'Finish this app', completed: false, date: moment('2019-10-08', 'YYYY-MM-DD') },
+  { text: 'Eat dinner', completed: false, date: moment('2019-10-15', 'YYYY-MM-DD') },
+  { text: 'Work out', completed: true, date: moment('2019-11-15', 'YYYY-MM-DD') },
+  { text: 'Sleep', completed: false, date: moment('2019-11-22', 'YYYY-MM-DD') },
+  { text: 'Relax', completed: true, date: moment('2019-11-25', 'YYYY-MM-DD') }
 ];
 
 function todos(state = INITIAL_TODOS, action) {
   switch (action.type) {
     case ADD_TODO:
+      const { text, date } = action.todo;
       return [
         ...state,
         {
-          text: action.text,
+          text: text,
+          date: moment(date, 'YYYY/MM/DD'),
           completed: false
         }
       ]

@@ -1,8 +1,8 @@
 export const ADD_TODO = 'ADD_TODO'
 export const CHECK_TODO = 'CHECK_TODO'
 
-export const addTodo = text => (
-  { type: ADD_TODO, text }
+export const addTodo = todo => (
+  { type: ADD_TODO, todo }
 )
 
 export const checkTodo = index => (

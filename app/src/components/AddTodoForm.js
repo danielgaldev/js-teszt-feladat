@@ -4,7 +4,7 @@ import { Add } from 'grommet-icons'
 import moment from 'moment'
 
 const AddTodoForm = (props) => (
-  <Form onSubmit={({ value }) => console.log(value)}>
+  <Form onSubmit={({ value }) => props.addTodo(value)}>
     <Box round='xsmall' width='large' pad='xsmall' border={{ size: 'xsmall', color: 'brand' }}>
       <Grid gap='xsmall' columns={['flex', 'auto', 'auto']}>
         <FormField
@@ -22,6 +22,7 @@ const AddTodoForm = (props) => (
           }}
           component={TextInput}
           placeholder='Date'
+          value={moment().format('YYYY/MM/DD')}
           plain />
         <Button type='submit' primary icon={<Add />} />
       </Grid>
