@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import moment from 'moment'
 
-import { ADD_TODO, CHECK_TODO } from './actions'
+import { ADD_TODO, CHECK_TODO, DELETE_TODO } from './actions'
 
 
 const INITIAL_TODOS = [
@@ -30,6 +30,12 @@ function todos(state = INITIAL_TODOS, action) {
         ...state.slice(0, i),
         { ...state[i], completed: !state[i].completed },
         ...state.slice(i + 1)
+      ]
+    case DELETE_TODO:
+      const j = action.index;
+      return [
+        ...state.slice(0, j),
+        ...state.slice(j + 1)
       ]
     default:
       return state

@@ -9,11 +9,16 @@ const TodoList = (props) => (
       border={{ size: 'xsmall', color: 'brand' }}
       round='xsmall'
       width='large'
-      pad = 'small'
+      pad='small'
       direction='column'
       overflow='auto'>
       {props.todos.map((todo, index) => (
-        <TodoItem todo={todo} index={index} key={index} checkTodo={props.checkTodo} />
+        <TodoItem
+          todo={todo}
+          index={index}
+          key={index}
+          checkTodo={props.checkTodo}
+          deleteTodo={props.deleteTodo} />
       ))}
     </Box>
   </Box>
