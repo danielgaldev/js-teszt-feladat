@@ -25,6 +25,7 @@ const TodoItem = (props) => {
         return [upArrow, downArrow]
     }
   }
+  const closeLater = () => setTimeout(props.closeUndoBox, 5000)
   return (
     <Grid columns={['flex', 'auto']}>
       <CheckBox
@@ -43,7 +44,13 @@ const TodoItem = (props) => {
       />
       <Box direction='row' justify='end' gap='small'>
         {arrows().map(arrow => arrow)}
-        <Button plain icon={<Trash />} onClick={() => { props.deleteTodo(props.index) }} />
+        <Button
+          plain
+          icon={<Trash />}
+          onClick={() => {
+            props.deleteTodo(props.index)
+            closeLater()
+          }} />
       </Box>
     </Grid>
 

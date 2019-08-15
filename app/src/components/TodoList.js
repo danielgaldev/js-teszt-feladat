@@ -28,7 +28,8 @@ const TodoList = (props) => (
           position={getPosition(index, props.todos.length)}
           checkTodo={props.checkTodo}
           deleteTodo={props.deleteTodo}
-          moveTodo={props.moveTodo} />
+          moveTodo={props.moveTodo}
+          closeUndoBox={props.closeUndoBox} />
       ))}
     </Box>
   </Box>

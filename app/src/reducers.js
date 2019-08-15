@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux'
 import moment from 'moment'
 
-import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO, UNDO_DELETE } from './actions'
+import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO, UNDO_DELETE, CLOSE_UNDO_BOX } from './actions'
 
 const storage = localStorage.getItem('todoArray')
 const INITIAL_STATE = {
   todos: storage ? JSON.parse(storage) : [],
-  deletedEntry: null
+  deletedEntry: null,
+  undoBoxOpen: false
 }
 
 function todoApp(state = INITIAL_STATE, action) {
@@ -36,6 +37,7 @@ function todoApp(state = INITIAL_STATE, action) {
       }
     case DELETE_TODO:
       return {
+        undoBoxOpen: true,
         deletedEntry: { todo: state.todos[i], index: i },
         todos: [
           ...state.todos.slice(0, i),
@@ -44,12 +46,18 @@ function todoApp(state = INITIAL_STATE, action) {
       }
     case UNDO_DELETE:
       return {
+        undoBoxOpen: false,
         deletedEntry: null,
         todos: [
           ...state.todos.slice(0, state.deletedEntry.index),
           { ...state.deletedEntry.todo },
           ...state.todos.slice(state.deletedEntry.index)
         ]
+      }
+    case CLOSE_UNDO_BOX:
+      return {
+        ...state,
+        undoBoxOpen: false
       }
     case MOVE_TODO:
       switch (action.direction) {
