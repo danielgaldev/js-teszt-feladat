@@ -4,9 +4,9 @@ import TodoItem from './TodoItem';
 
 const getPosition = (index, length) => {
   return (
-    index === 0 ? 'first' :
-      index === length - 1 ? 'last' :
-        length === 1 ? 'only' :
+    index === 0 && length === 1 ? 'only' :
+      index === 0 ? 'first' :
+        index === length - 1 ? 'last' :
           'middle'
   )
 }

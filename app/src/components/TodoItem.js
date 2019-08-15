@@ -19,31 +19,34 @@ const TodoItem = (props) => {
         return [downArrow]
       case 'last':
         return [upArrow]
+      case 'only':
+        return []
       default:
         return [upArrow, downArrow]
     }
   }
   return (
-    <CheckBox
-      checked={props.todo.completed}
-      label={
-        <Grid fill='horizontal' as='li' columns={['auto', 'flex']} pad='small'>
+    <Grid columns={['flex', 'auto']}>
+      <CheckBox
+        checked={props.todo.completed}
+        label={
           <Box direction='row' gap='small' align='center' pad='xsmall'>
             <Text>{props.todo.text}</Text>
             <Text size='xsmall'>
               {moment(props.todo.date).format('YYYY. MMMM D.')}
             </Text>
           </Box>
-          <Box direction='row' justify='end' gap='small'>
-            {arrows().map(arrow => arrow)}
-            <Button plain icon={<Trash />} onClick={() => { props.deleteTodo(props.index) }} />
-          </Box>
-        </Grid>
-      }
-      onChange={event => {
-        props.checkTodo(props.index);
-      }}
-    />
+        }
+        onChange={event => {
+          props.checkTodo(props.index)
+        }}
+      />
+      <Box direction='row' justify='end' gap='small'>
+        {arrows().map(arrow => arrow)}
+        <Button plain icon={<Trash />} onClick={() => { props.deleteTodo(props.index) }} />
+      </Box>
+    </Grid>
+
   )
 }
 
