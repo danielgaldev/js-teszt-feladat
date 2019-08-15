@@ -6,7 +6,7 @@ import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO, UNDO_DELETE } from './act
 const storage = localStorage.getItem('todoArray')
 const INITIAL_STATE = {
   todos: storage ? JSON.parse(storage) : [],
-  todosBeforeDelete: null
+  deletedEntry: null
 }
 
 function todoApp(state = INITIAL_STATE, action) {
@@ -36,7 +36,7 @@ function todoApp(state = INITIAL_STATE, action) {
       }
     case DELETE_TODO:
       return {
-        todosBeforeDelete: [...state.todos],
+        deletedEntry: { todo: state.todos[i], index: i },
         todos: [
           ...state.todos.slice(0, i),
           ...state.todos.slice(i + 1)
@@ -44,8 +44,12 @@ function todoApp(state = INITIAL_STATE, action) {
       }
     case UNDO_DELETE:
       return {
-        todosBeforeDelete: null,
-        todos: state.todosBeforeDelete.slice(0)
+        deletedEntry: null,
+        todos: [
+          ...state.todos.slice(0, state.deletedEntry.index),
+          { ...state.deletedEntry.todo },
+          ...state.todos.slice(state.deletedEntry.index)
+        ]
       }
     case MOVE_TODO:
       switch (action.direction) {
