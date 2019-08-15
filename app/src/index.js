@@ -10,7 +10,7 @@ import App from './App'
 import reducers from './reducers'
 
 const saveState = (prevState, nextState, action, dispatch) => {
-  localStorage.setItem('todoArray', JSON.stringify(nextState.todos))
+  localStorage.setItem('todoArray', JSON.stringify(nextState.todoApp.todos))
 }
 
 const store = createStore(reducers, applyMiddleware(onStateChange(saveState)))

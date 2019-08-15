@@ -18,7 +18,7 @@ class TodoListContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  todos: state.todos
+  todos: state.todoApp.todos
 })
 
 export default connect(mapStateToProps, { addTodo, checkTodo, deleteTodo, moveTodo })(TodoListContainer)

@@ -1,51 +1,74 @@
 import { combineReducers } from 'redux'
 import moment from 'moment'
 
-import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO } from './actions'
+import { ADD_TODO, CHECK_TODO, DELETE_TODO, MOVE_TODO, UNDO_DELETE } from './actions'
 
 const storage = localStorage.getItem('todoArray')
-const INITIAL_TODOS = storage ? JSON.parse(storage) : []
+const INITIAL_STATE = {
+  todos: storage ? JSON.parse(storage) : [],
+  todosBeforeDelete: null
+}
 
-function todos(state = INITIAL_TODOS, action) {
+function todoApp(state = INITIAL_STATE, action) {
   const i = action.index;
   switch (action.type) {
     case ADD_TODO:
       const { text, date } = action.todo;
-      return [
+      return {
         ...state,
-        {
-          text: text,
-          date: moment(date, 'YYYY/MM/DD'),
-          completed: false
-        }
-      ]
+        todos: [
+          ...state.todos,
+          {
+            text: text,
+            date: moment(date, 'YYYY/MM/DD'),
+            completed: false
+          }
+        ]
+      }
     case CHECK_TODO:
-      return [
-        ...state.slice(0, i),
-        { ...state[i], completed: !state[i].completed },
-        ...state.slice(i + 1)
-      ]
+      return {
+        ...state,
+        todos: [
+          ...state.todos.slice(0, i),
+          { ...state.todos[i], completed: !state.todos[i].completed },
+          ...state.todos.slice(i + 1)
+        ]
+      }
     case DELETE_TODO:
-      return [
-        ...state.slice(0, i),
-        ...state.slice(i + 1)
-      ]
+      return {
+        todosBeforeDelete: [...state.todos],
+        todos: [
+          ...state.todos.slice(0, i),
+          ...state.todos.slice(i + 1)
+        ]
+      }
+    case UNDO_DELETE:
+      return {
+        todosBeforeDelete: null,
+        todos: state.todosBeforeDelete.slice(0)
+      }
     case MOVE_TODO:
       switch (action.direction) {
         case 'up':
-          return [
-            ...state.slice(0, i - 1),
-            { ...state[i] },
-            { ...state[i - 1] },
-            ...state.slice(i + 1)
-          ]
+          return {
+            ...state,
+            todos: [
+              ...state.todos.slice(0, i - 1),
+              { ...state.todos[i] },
+              { ...state.todos[i - 1] },
+              ...state.todos.slice(i + 1)
+            ]
+          }
         case 'down':
-          return [
-            ...state.slice(0, i),
-            { ...state[i + 1] },
-            { ...state[i] },
-            ...state.slice(i + 2)
-          ]
+          return {
+            ...state,
+            todos: [
+              ...state.todos.slice(0, i),
+              { ...state.todos[i + 1] },
+              { ...state.todos[i] },
+              ...state.todos.slice(i + 2)
+            ]
+          }
         default:
           return state
       }
@@ -55,7 +78,7 @@ function todos(state = INITIAL_TODOS, action) {
 }
 
 const reducers = combineReducers({
-  todos
+  todoApp
 })
 
 export default reducers
