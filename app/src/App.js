@@ -3,7 +3,7 @@ import { Box, Heading } from 'grommet'
 
 import TodoListContainer from './containers/TodoListContainer';
 import AddTodoContainer from './containers/AddTodoContainer';
-import UndoButtonContainer from './containers/UndoButtonContainer';
+import UndoContainer from './containers/UndoContainer';
 
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
         <Heading>TodoApp</Heading>
         <AddTodoContainer />
         <TodoListContainer />
-        <UndoButtonContainer />
+        <UndoContainer />
       </Box>
     );
   }
