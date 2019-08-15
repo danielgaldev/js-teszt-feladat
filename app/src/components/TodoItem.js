@@ -33,9 +33,9 @@ const TodoItem = (props) => {
         label={
           <Box direction='row' gap='small' align='center' pad='xsmall'>
             <Text>{props.todo.text}</Text>
-            <Text size='xsmall'>
+            {props.todo.date && (<Text size='xsmall'>
               {moment(props.todo.date).format('YYYY. MMMM D.')}
-            </Text>
+            </Text>)}
           </Box>
         }
         onChange={event => {

@@ -24,14 +24,13 @@ const AddTodoForm = (props) => (
         <Box direction='row' justify='between' gap='small'>
           <FormField
             name='date'
-            required
             validate={input => {
-              if (!moment(input, 'YYYY/MM/DD', true).isValid())
+              if (input !== '' && !moment(input, 'YYYY/MM/DD', true).isValid())
                 return 'Format: YYYY/MM/DD'
             }}
             component={TextInput}
-            placeholder='Date'
-            value={moment().format('YYYY/MM/DD')}
+            placeholder='YYYY/MM/DD'
+            value=''
             plain />
           <Button type='submit' primary icon={<Add />} />
         </Box>

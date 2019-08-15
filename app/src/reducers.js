@@ -21,7 +21,7 @@ function todoApp(state = INITIAL_STATE, action) {
           ...state.todos,
           {
             text: text,
-            date: moment(date, 'YYYY/MM/DD'),
+            date: date === '' ? null : moment(date, 'YYYY/MM/DD'),
             completed: false
           }
         ]
